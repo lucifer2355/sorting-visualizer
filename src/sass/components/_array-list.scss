@@ -1,0 +1,8 @@
+.arrlist {
+  display: flex;
+  justify-content: space-between;
+
+  &__item {
+    font-size: 10px;
+  }
+}

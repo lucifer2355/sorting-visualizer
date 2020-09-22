@@ -1,9 +1,10 @@
 import React from "react";
+import CreateArray from "./components/CreateArray";
 
 function App() {
   return (
     <div className='app'>
-      <h1>Hello World</h1>
+      <CreateArray />
     </div>
   );
 }
