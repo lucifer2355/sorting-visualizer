@@ -4,23 +4,23 @@ import { connect } from "react-redux";
 
 import * as createArrayAction from "../store/actions";
 
-const CreateArray = () => {
+const CreateArray = (props) => {
   const dispatch = useDispatch();
-  const [arr, setArr] = useState([]);
-  const rndArray = [];
+  const [array, setArray] = useState(props.array.array);
 
   const genrateArray = useCallback(async () => {
+    let rndArray = [];
     for (let i = 1; i <= 100; i++) {
       rndArray.push(Math.floor(Math.random() * 100 + 1));
     }
 
     try {
-      setArr(rndArray);
-      await dispatch(createArrayAction.createArray(arr));
+      await dispatch(createArrayAction.createArray(rndArray));
+      setArray(rndArray);
     } catch (error) {
       console.log("Create Array Error", error);
     }
-  }, [dispatch, arr, rndArray]);
+  }, [dispatch]);
 
   useEffect(() => {
     genrateArray();
@@ -28,7 +28,7 @@ const CreateArray = () => {
 
   return (
     <div className='arrlist'>
-      {arr.map((item, index) => (
+      {array.map((item, index) => (
         <div key={index} className='arrlist__item'>
           {item}
         </div>
@@ -37,4 +37,10 @@ const CreateArray = () => {
   );
 };
 
-export default CreateArray;
+const mapStateToProps = (state) => {
+  return {
+    array: state.array,
+  };
+};
+
+export default connect(mapStateToProps)(CreateArray);
