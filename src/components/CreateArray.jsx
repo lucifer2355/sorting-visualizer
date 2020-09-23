@@ -10,7 +10,7 @@ const CreateArray = (props) => {
 
   const genrateArray = useCallback(async () => {
     let rndArray = [];
-    for (let i = 1; i <= 80; i++) {
+    for (let i = 1; i <= 60; i++) {
       rndArray.push(Math.floor(Math.random() * 100) + 1);
     }
     await dispatch(createArrayAction.createArray(rndArray));
@@ -27,7 +27,7 @@ const CreateArray = (props) => {
           key={index}
           className='arrlist__item'
           style={{
-            height: item * 3,
+            height: `${item * 3}px`,
             background: props.index.includes(index) ? "#f66d12" : "#1283f6",
           }}
         >
