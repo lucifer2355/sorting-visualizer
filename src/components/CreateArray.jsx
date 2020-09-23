@@ -6,20 +6,14 @@ import * as createArrayAction from "../store/actions";
 
 const CreateArray = (props) => {
   const dispatch = useDispatch();
-  const [array, setArray] = useState(props.array.array);
+  // const [array, setArray] = useState(props.array.array);
 
   const genrateArray = useCallback(async () => {
     let rndArray = [];
     for (let i = 1; i <= 80; i++) {
-      rndArray.push(Math.floor(Math.random() * 100 + 1));
+      rndArray.push(Math.floor(Math.random() * 100) + 1);
     }
-
-    try {
-      await dispatch(createArrayAction.createArray(rndArray));
-      setArray(rndArray);
-    } catch (error) {
-      console.log("Create Array Error", error);
-    }
+    await dispatch(createArrayAction.createArray(rndArray));
   }, [dispatch]);
 
   useEffect(() => {
@@ -28,8 +22,15 @@ const CreateArray = (props) => {
 
   return (
     <div className='arrlist'>
-      {array.map((item, index) => (
-        <div key={index} className='arrlist__item'>
+      {props.array.map((item, index) => (
+        <div
+          key={index}
+          className='arrlist__item'
+          style={{
+            height: item * 3,
+            background: props.index.includes(index) ? "#f66d12" : "#1283f6",
+          }}
+        >
           {item}
         </div>
       ))}
@@ -39,7 +40,8 @@ const CreateArray = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    array: state.array,
+    array: state.array.array,
+    index: state.array.index,
   };
 };
 

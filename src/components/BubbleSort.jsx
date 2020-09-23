@@ -7,7 +7,6 @@ import * as createArrayAction from "../store/actions";
 
 const BubbleSort = (props) => {
   const dispatch = useDispatch();
-  const [index, setIndex] = useState();
 
   const bubbleSort = async () => {
     let arr = props.array.array;
@@ -31,7 +30,7 @@ const BubbleSort = (props) => {
         setTimeout(
           async (arr, index) => {
             await dispatch(createArrayAction.createArray(arr));
-            setIndex(index);
+            await dispatch(createArrayAction.setIndex(index));
           },
           t * time,
           [...arr],
@@ -40,12 +39,16 @@ const BubbleSort = (props) => {
         t++;
       }
       setTimeout(() => {
-        setIndex();
+        dispatch(createArrayAction.setIndex([]));
         let indices = [];
         let i = 0;
         for (i = 0; i < props.array.array.length; i++) {
           indices.push(i);
-          setTimeout((indices) => setIndex(indices), i * time, [...indices]);
+          setTimeout(
+            (indices) => dispatch(createArrayAction.setIndex(indices)),
+            i * time,
+            [...indices]
+          );
         }
       }, t * time);
     }
