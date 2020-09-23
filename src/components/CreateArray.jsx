@@ -10,7 +10,7 @@ const CreateArray = (props) => {
 
   const genrateArray = useCallback(async () => {
     let rndArray = [];
-    for (let i = 1; i <= 100; i++) {
+    for (let i = 1; i <= 80; i++) {
       rndArray.push(Math.floor(Math.random() * 100 + 1));
     }
 
