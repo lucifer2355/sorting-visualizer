@@ -63,10 +63,10 @@ const BubbleSort = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ({ array }) => {
   return {
-    array: state.array,
-    index: state.array.index,
+    array: array,
+    index: array.index,
   };
 };
 
